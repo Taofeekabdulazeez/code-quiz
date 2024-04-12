@@ -1,5 +1,12 @@
+import Timer from "./components/Timer";
+import { Container } from "./ui/Container";
+
 function App() {
-  return <div>App</div>;
+  return (
+    <Container>
+      <Timer />
+    </Container>
+  );
 }
 
 export default App;
