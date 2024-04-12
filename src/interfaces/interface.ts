@@ -13,6 +13,8 @@ export interface actionObj {
 export interface QuizContextInterface {
   questions?: Array<questionObj>;
   index: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  answers: Array<any>;
   // answer?: string;
   status?: string;
   dispatch?: (action: actionObj) => void;

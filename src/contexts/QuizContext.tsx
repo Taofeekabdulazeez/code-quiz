@@ -9,6 +9,7 @@ const initialState: QuizContextInterface = {
   status: "",
   questions: [],
   index: 0,
+  answers: [],
 };
 
 function reducer(state: QuizContextInterface, action: actionObj) {
@@ -16,7 +17,12 @@ function reducer(state: QuizContextInterface, action: actionObj) {
     case "loading":
       return { ...state };
     case "dataReceived":
-      return { ...state, status: "ready", questions: action.payload };
+      return {
+        ...state,
+        status: "ready",
+        questions: action.payload,
+        answers: Array.from({ length: action.payload.length }, () => ""),
+      };
     case "nextQuestion":
       return {
         ...state,
@@ -32,23 +38,34 @@ function reducer(state: QuizContextInterface, action: actionObj) {
       };
     case "gotoQuestion":
       return { ...state, index: action.payload };
+    case "newAnswer":
+      return {
+        ...state,
+        answers: state.answers?.fill(
+          action.payload,
+          state.index,
+          state.index + 1
+        ),
+      };
     default:
       throw new Error("Action Unknown!");
   }
 }
 
-const QuizContent = createContext<QuizContextInterface>({ index: 0 });
+const QuizContent = createContext<QuizContextInterface>({
+  index: 0,
+  answers: [],
+});
 3;
 
 function QuizProvider({ children }: QuizProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { status, questions, index } = state;
+  const { status, questions, index, answers } = state;
 
   useEffect(function () {
     async function fetchQuestions() {
       const response = await fetch("http://localhost:8000/questions");
       const data = await response.json();
-      console.log(data);
       dispatch({ type: "dataReceived", payload: data });
     }
 
@@ -62,6 +79,7 @@ function QuizProvider({ children }: QuizProviderProps) {
         dispatch,
         questions,
         index,
+        answers,
       }}
     >
       {children}

@@ -36,8 +36,10 @@ function Question() {
       </Span>
       <StyledQuestion>{question?.question}</StyledQuestion>
       <List>
-        {question?.options.map((option) => (
-          <Option>{option}</Option>
+        {question?.options.map((option, i) => (
+          <Option key={option} optIndex={i}>
+            {option}
+          </Option>
         ))}
       </List>
     </div>

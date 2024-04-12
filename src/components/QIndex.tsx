@@ -35,10 +35,13 @@ interface QindexProps {
 }
 
 function QIndex({ qNumber }: QindexProps) {
-  const { index, dispatch } = useQuiz();
+  const { index, dispatch, answers } = useQuiz();
+  const hasAnswer = typeof answers[qNumber - 1] === "number";
   return (
     <Button
-      className={index + 1 === qNumber ? "active" : ""}
+      className={`${index + 1 === qNumber ? "active" : ""} ${
+        hasAnswer ? "answered" : ""
+      }`}
       onClick={() => dispatch?.({ type: "gotoQuestion", payload: qNumber - 1 })}
     >
       {qNumber}
