@@ -7,12 +7,14 @@ import { Container } from "./ui/Container";
 import QuestionsNav from "./components/QuestionsNav";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useQuiz } from "./contexts/QuizContext";
+import Aside from "./components/Aside";
 
 const AppContainer = styled.div`
   display: grid;
-  /* grid-template-columns: 1fr 0.3fr; */
-  width: 100rem;
+  grid-template-columns: 1fr 0.3fr;
+  /* width: 100rem; */
   margin: 0 auto;
+  gap: 1.6rem;
   padding: 1.6rem;
 `;
 
@@ -60,6 +62,9 @@ function App() {
         </Container>
         <QuestionsNav />
       </main>
+      <Aside>
+        <div></div>
+      </Aside>
     </AppContainer>
   );
 }
