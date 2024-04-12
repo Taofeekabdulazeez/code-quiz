@@ -9,14 +9,15 @@
   --color-text-gray: #777;
   --color-green: #1cbd4b;
   --color-red: #c71f16;
-  --ff-body: sans-serif;
+  --ff-body: "Poppins", sans-serif;
 }
 
 :root.light-mode {
   --color-primary: #0837fb;
   --color-text: #333;
   --color-bg-900: #fff;
-  --color-bg-700: #f0f3f7;
+  /* --color-bg-700: #f0f3f7; */
+  --color-bg-700: #f7f7f8;
   --color-bg-500: #545454;
 }
 
