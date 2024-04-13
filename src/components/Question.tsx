@@ -3,9 +3,10 @@ import Option from "./Option";
 import styled from "styled-components";
 
 const Span = styled.span`
-  font-size: 1.6rem;
-  font-weight: 500;
+  font-size: 1.4rem;
+  font-weight: 600;
   display: block;
+  text-transform: uppercase;
   margin-bottom: 2.4rem;
 `;
 

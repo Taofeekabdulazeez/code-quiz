@@ -3,13 +3,13 @@ import styled, { css } from "styled-components";
 export const Button = styled.button<{ $type?: string }>`
   background: none;
   border: 0;
-  padding: 1.2rem 1.8rem;
-  font-size: 1.6rem;
-  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 500;
   border: 0.2rem solid var(--color-primary);
   background-color: var(--color-primary);
   color: #fff;
-  border-radius: 13px;
+  border-radius: 9px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;

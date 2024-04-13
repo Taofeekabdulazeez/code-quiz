@@ -10,6 +10,8 @@ const initialState: QuizContextInterface = {
   questions: [],
   index: 0,
   answers: [],
+  onSubmit: false,
+  score: 0,
 };
 
 function reducer(state: QuizContextInterface, action: actionObj) {
@@ -23,6 +25,8 @@ function reducer(state: QuizContextInterface, action: actionObj) {
         questions: action.payload,
         answers: Array.from({ length: action.payload.length }, () => ""),
       };
+    case "start":
+      return { ...state, status: "gameOn" };
     case "nextQuestion":
       return {
         ...state,
@@ -47,6 +51,20 @@ function reducer(state: QuizContextInterface, action: actionObj) {
           state.index + 1
         ),
       };
+    case "onSubmit":
+      return { ...state, onSubmit: true };
+    case "unSubmit":
+      return { ...state, onSubmit: false };
+    case "end":
+      return {
+        ...state,
+        status: "finish",
+        score: state.questions
+          ? state.answers.filter(
+              (answer, index) => answer === state.questions[index].correctOption
+            ).length
+          : 0,
+      };
     default:
       throw new Error("Action Unknown!");
   }
@@ -55,12 +73,13 @@ function reducer(state: QuizContextInterface, action: actionObj) {
 const QuizContent = createContext<QuizContextInterface>({
   index: 0,
   answers: [],
+  questions: [],
 });
 3;
 
 function QuizProvider({ children }: QuizProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { status, questions, index, answers } = state;
+  const { status, questions, index, answers, onSubmit, score } = state;
 
   useEffect(function () {
     async function fetchQuestions() {
@@ -80,6 +99,8 @@ function QuizProvider({ children }: QuizProviderProps) {
         questions,
         index,
         answers,
+        onSubmit,
+        score,
       }}
     >
       {children}

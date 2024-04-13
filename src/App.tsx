@@ -1,70 +1,46 @@
 import styled from "styled-components";
-import Header from "./components/Header";
-import Question from "./components/Question";
-import Timer from "./components/Timer";
-import { Button } from "./ui/Button";
-import { Container } from "./ui/Container";
 import QuestionsNav from "./components/QuestionsNav";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useQuiz } from "./contexts/QuizContext";
 import Aside from "./components/Aside";
+import Time from "./components/Time";
+import Answered from "./components/Answered";
+import ButtonSubmit from "./components/ButtonSubmit";
+import Modal from "./components/Modal";
+import Main from "./components/Main";
+import StartScreen from "./components/StartScreen";
+import QuestionScreen from "./components/QuestionScreen";
+import FinishScreen from "./components/FinishScreen";
 
 const AppContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 0.3fr;
-  /* width: 100rem; */
   margin: 0 auto;
+  position: relative;
   gap: 1.6rem;
   padding: 1.6rem;
-`;
-
-const ButtonWrap = styled.div`
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  display: flex;
-  gap: 1.2rem;
+  background-color: var(--color-bg-900);
 `;
 
 function App() {
-  const { dispatch } = useQuiz();
+  const { status } = useQuiz();
   return (
     <AppContainer>
-      <main>
-        <Container>
-          <Header>
-            <Timer />
-            <Button>Submit</Button>
-          </Header>
-          <Question />
-          <ButtonWrap>
-            <Button
-              $type="inverted"
-              onClick={() =>
-                dispatch?.({
-                  type: "prevQuestion",
-                })
-              }
-            >
-              <FaArrowLeft /> Previous
-            </Button>
-            <Button
-              $type="inverted"
-              onClick={() =>
-                dispatch?.({
-                  type: "nextQuestion",
-                })
-              }
-            >
-              Next <FaArrowRight />
-            </Button>
-          </ButtonWrap>
-        </Container>
-        <QuestionsNav />
-      </main>
-      <Aside>
-        <div></div>
-      </Aside>
+      {status === "ready" && <StartScreen />}
+      {status === "gameOn" && (
+        <>
+          <Main>
+            <Modal />
+            <QuestionScreen />
+            <QuestionsNav />
+          </Main>
+          <Aside>
+            <Time />
+            <Answered />
+            <ButtonSubmit />
+          </Aside>
+        </>
+      )}
+      {status === "finish" && <FinishScreen />}
     </AppContainer>
   );
 }
