@@ -13,7 +13,8 @@
 }
 
 :root.light-mode {
-  --color-primary: #0837fb;
+  --color-primary: #0672cb;
+  /* --color-primary: #0837fb; */
   --color-text: #333;
   --color-bg-900: #fff;
   /* --color-bg-700: #f0f3f7; */
@@ -22,7 +23,7 @@
 }
 
 :root.dark-mode {
-  --color-primary: #0837fb;
+  --color-primary: #0672cb;
   --color-text: #eee;
   --color-bg-900: #07080b;
   --color-bg-700: #242424;
