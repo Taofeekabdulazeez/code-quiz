@@ -39,5 +39,6 @@ body {
   font-family: var(--ff-body);
   line-height: var(--line-height-body);
   color: var(--color-text);
+  /* background-color: #f5f9fd; */
   /* background-color: var(--color-bg-900); */
 }

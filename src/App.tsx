@@ -12,12 +12,15 @@ import QuestionScreen from "./components/QuestionScreen";
 import FinishScreen from "./components/FinishScreen";
 
 const AppContainer = styled.div`
+  padding: 1.6rem;
+`;
+
+const MainLayout = styled.div`
   display: grid;
   grid-template-columns: 1fr 0.3fr;
   margin: 0 auto;
   position: relative;
   gap: 1.6rem;
-  padding: 1.6rem;
   background-color: var(--color-bg-900);
 `;
 
@@ -27,7 +30,7 @@ function App() {
     <AppContainer>
       {status === "ready" && <StartScreen />}
       {status === "gameOn" && (
-        <>
+        <MainLayout>
           <Main>
             <Modal />
             <QuestionScreen />
@@ -38,7 +41,7 @@ function App() {
             <Answered />
             <ButtonSubmit />
           </Aside>
-        </>
+        </MainLayout>
       )}
       {status === "finish" && <FinishScreen />}
     </AppContainer>
