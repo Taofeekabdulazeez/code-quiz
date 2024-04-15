@@ -17,7 +17,7 @@ export interface QuizContextInterface {
   score?: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   answers: Array<any>;
-  // answer?: string;
+  answered?: number;
   status?: string;
   dispatch?: (action: actionObj) => void;
 }

@@ -81,6 +81,10 @@ function QuizProvider({ children }: QuizProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { status, questions, index, answers, onSubmit, score } = state;
 
+  const answered = answers.filter(
+    (answer) => typeof answer === "number"
+  ).length;
+
   useEffect(function () {
     async function fetchQuestions() {
       const response = await fetch("http://localhost:8000/questions");
@@ -101,6 +105,7 @@ function QuizProvider({ children }: QuizProviderProps) {
         answers,
         onSubmit,
         score,
+        answered,
       }}
     >
       {children}

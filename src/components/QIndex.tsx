@@ -1,7 +1,9 @@
-import styled from "styled-components";
 import { useQuiz } from "../contexts/QuizContext";
+import styled from "styled-components";
+import { FaCheck } from "react-icons/fa";
 
 const Button = styled.button`
+  position: relative;
   background: 0;
   display: flex;
   align-items: center;
@@ -17,12 +19,22 @@ const Button = styled.button`
   cursor: pointer;
   /* transition: all 0.3s; */
 
+  & svg {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0.1rem;
+  }
+
   &.answered {
     /* background-color: var(--color-green); */
     /* color: #fff; */
     background-color: #bee0f5;
     color: #0672cb;
     /* border: 0.15rem solid var(--color-green); */
+    svg {
+      display: block;
+    }
   }
 
   &.active {
@@ -46,6 +58,7 @@ function QIndex({ qNumber }: QindexProps) {
       }`}
       onClick={() => dispatch?.({ type: "gotoQuestion", payload: qNumber - 1 })}
     >
+      {false && <FaCheck size={8} />}
       {qNumber}
     </Button>
   );

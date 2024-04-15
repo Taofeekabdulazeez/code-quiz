@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useQuiz } from "../contexts/QuizContext";
 
 const P = styled.div`
   font-size: 1.2rem;
@@ -9,7 +10,12 @@ const P = styled.div`
 `;
 
 function Answered() {
-  return <P>12 of 30 questions answered</P>;
+  const { answered, questions } = useQuiz();
+  return (
+    <P>
+      {answered} of {questions.length} questions answered
+    </P>
+  );
 }
 
 export default Answered;
