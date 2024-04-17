@@ -3,7 +3,6 @@ import { Container } from "../ui/Container";
 import Header from "./Header";
 import Question from "./Question";
 import Timer from "./Timer";
-import { useQuiz } from "../contexts/QuizContext";
 import styled from "styled-components";
 import { Button } from "../ui/Button";
 
@@ -16,7 +15,6 @@ const ButtonWrap = styled.div`
 `;
 
 function QuestionScreen() {
-  const { dispatch } = useQuiz();
   return (
     <Container>
       <Header>
@@ -25,22 +23,10 @@ function QuestionScreen() {
       </Header>
       <Question />
       <ButtonWrap>
-        <Button
-          onClick={() =>
-            dispatch?.({
-              type: "prevQuestion",
-            })
-          }
-        >
+        <Button onClick={() => {}}>
           <FaArrowLeft /> Previous
         </Button>
-        <Button
-          onClick={() =>
-            dispatch?.({
-              type: "nextQuestion",
-            })
-          }
-        >
+        <Button onClick={() => {}}>
           Next <FaArrowRight />
         </Button>
       </ButtonWrap>
