@@ -11,7 +11,7 @@ function App() {
     <AppLayout>
       {status === "ready" && <StartScreen />}
       {status === "start" && <Main />}
-      {status === "submitting" && <Loader message="Submitting..." />}
+      {status === "submitting" && <Loader message="Submitting.." />}
       {status === "finish" && <FinishScreen />}
     </AppLayout>
   );
