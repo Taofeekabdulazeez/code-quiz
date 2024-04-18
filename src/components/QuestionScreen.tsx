@@ -2,7 +2,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Container } from "../ui/Container";
 import Header from "./Header";
 import Question from "./Question";
-import Timer from "./Timer";
+import Timer from "../ui/Timer";
 import styled from "styled-components";
 import { Button } from "../ui/Button";
 import { useAppDispatch } from "../hooks/hooks";

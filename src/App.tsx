@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import StartScreen from "./components/StartScreen";
 import FinishScreen from "./components/FinishScreen";
-import Main, { loader as questionsLoader } from "./components/Main.tsx";
+import Main from "./components/Main.tsx";
 import AppLayout from "./components/AppLayout.tsx";
 
 const router = createBrowserRouter([
@@ -9,7 +9,7 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { element: <StartScreen />, path: "/" },
-      { element: <Main />, path: "quiz", loader: questionsLoader },
+      { element: <Main />, path: "quiz" },
       { element: <FinishScreen />, path: "finish" },
     ],
   },

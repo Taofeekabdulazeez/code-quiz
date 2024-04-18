@@ -22,13 +22,13 @@ export interface QuizAction {
 }
 
 export interface QuizState {
-  status: string;
   questions: Array<questionObj>;
   index: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  answers: Array<any>;
+  answers: Array<number | null>;
   onSubmit: boolean;
   score: number;
+  time: null | number;
+  status?: string;
 }
 
 // The context will always include more derived states
@@ -37,8 +37,7 @@ export interface QuizContextInterface {
   index: number;
   onSubmit?: boolean;
   score?: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  answers: Array<any>;
+  answers: Array<null | number>;
   answered?: number;
   status?: string;
   dispatch?: (action: QuizAction) => void;

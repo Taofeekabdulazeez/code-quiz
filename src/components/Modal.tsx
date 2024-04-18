@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { submit, unConfirmSubmission } from "../features/quizSlice";
 import { useNavigate } from "react-router-dom";
+import styled, { css } from "styled-components";
 
 const StyledModal = styled.div`
   position: fixed;

@@ -26,7 +26,6 @@ interface OptionProps {
 }
 
 function Option({ children, optIndex }: OptionProps) {
-  // const { dispatch, answers, index } = useQuiz();
   const { answers, index } = useAppSelector((state) => state.quiz);
   const dispatch = useAppDispatch();
   return (

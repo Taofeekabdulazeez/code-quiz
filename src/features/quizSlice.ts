@@ -1,16 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { questionObj } from "../interfaces/interface";
-
-const SECS_PER_QUESTION = 30;
-
-interface QuizState {
-  questions: Array<questionObj>;
-  index: number;
-  answers: Array<number | null>;
-  onSubmit: boolean;
-  score: number;
-  time: null | number;
-}
+import { QuizState, questionObj } from "../interfaces/interface";
+import { SECS_PER_QUESTION } from "../configs/AppConfig";
 
 const initialState: QuizState = {
   questions: [],
@@ -53,7 +43,7 @@ const quizSlice = createSlice({
     },
     submit(state) {
       state.score = state.answers.filter(
-        (answer, i) => answer === state.questions[i].correctOption
+        (answer, index) => answer === state.questions[index].correctOption
       ).length;
     },
   },

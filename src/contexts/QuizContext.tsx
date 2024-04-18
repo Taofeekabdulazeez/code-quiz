@@ -13,6 +13,7 @@ const initialState: QuizState = {
   answers: [],
   onSubmit: false,
   score: 0,
+  time: null,
 };
 
 function reducer(state: QuizState, action: QuizAction) {
@@ -24,7 +25,7 @@ function reducer(state: QuizState, action: QuizAction) {
         ...state,
         status: "ready",
         questions: action.payload,
-        answers: Array.from({ length: action.payload.length }, () => ""),
+        answers: Array.from({ length: action.payload.length }, () => null),
       };
     case "start":
       return { ...state, status: "gameOn" };

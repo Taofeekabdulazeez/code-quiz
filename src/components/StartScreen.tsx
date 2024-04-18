@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { startQuiz } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 import { Button } from "../ui/Button";
 
 const StyledStartScreen = styled.div`
