@@ -6,6 +6,9 @@ import Time from "./Time";
 import Answered from "./Answered";
 import ButtonSubmit from "./ButtonSubmit";
 import Aside from "./Aside";
+import { questionObj } from "../interfaces/interface";
+import store from "../../store";
+import { storeQuestions } from "../features/quizSlice";
 
 const MainLayout = styled.main`
   display: grid;
@@ -21,14 +24,24 @@ function Main() {
     <MainLayout>
       <Modal />
       <QuestionScreen />
-      <QuestionsNav />
       <Aside>
         <Time />
         <Answered />
         <ButtonSubmit />
       </Aside>
+      <QuestionsNav />
     </MainLayout>
   );
 }
 
 export default Main;
+
+// eslint-disable-next-line react-refresh/only-export-components
+export async function loader(): Promise<questionObj> {
+  const response = await fetch("http://localhost:8000/questions");
+  const data = await response.json();
+
+  store.dispatch(storeQuestions(data));
+
+  return data;
+}

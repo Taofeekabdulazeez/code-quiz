@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { useQuiz } from "../contexts/QuizContext";
+import { useAppDispatch } from "../hooks/hooks";
+import { confirmSubmission } from "../features/quizSlice";
 
 export const Button = styled.button<{ $type?: string }>`
   text-align: center;
@@ -18,9 +19,15 @@ export const Button = styled.button<{ $type?: string }>`
 `;
 
 function ButtonSubmit() {
-  const { dispatch } = useQuiz();
+  const dispatch = useAppDispatch();
   return (
-    <Button onClick={() => dispatch?.({ type: "onSubmit" })}>SUBMIT</Button>
+    <Button
+      onClick={() => {
+        dispatch(confirmSubmission());
+      }}
+    >
+      SUBMIT
+    </Button>
   );
 }
 

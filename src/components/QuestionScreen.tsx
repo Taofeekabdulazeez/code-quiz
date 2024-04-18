@@ -5,6 +5,8 @@ import Question from "./Question";
 import Timer from "./Timer";
 import styled from "styled-components";
 import { Button } from "../ui/Button";
+import { useAppDispatch } from "../hooks/hooks";
+import { nextQuestion, prevQuestion } from "../features/quizSlice";
 
 const ButtonWrap = styled.div`
   position: absolute;
@@ -15,6 +17,7 @@ const ButtonWrap = styled.div`
 `;
 
 function QuestionScreen() {
+  const dispatch = useAppDispatch();
   return (
     <Container>
       <Header>
@@ -23,10 +26,18 @@ function QuestionScreen() {
       </Header>
       <Question />
       <ButtonWrap>
-        <Button onClick={() => {}}>
+        <Button
+          onClick={() => {
+            dispatch(prevQuestion());
+          }}
+        >
           <FaArrowLeft /> Previous
         </Button>
-        <Button onClick={() => {}}>
+        <Button
+          onClick={() => {
+            dispatch(nextQuestion());
+          }}
+        >
           Next <FaArrowRight />
         </Button>
       </ButtonWrap>

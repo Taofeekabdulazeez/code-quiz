@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import CheckBox from "../ui/CheckBox";
-import { useQuiz } from "../contexts/QuizContext";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { newAnwser } from "../features/quizSlice";
 
 const StyledOption = styled.li`
   display: flex;
@@ -25,11 +26,11 @@ interface OptionProps {
 }
 
 function Option({ children, optIndex }: OptionProps) {
-  const { dispatch, answers, index } = useQuiz();
+  // const { dispatch, answers, index } = useQuiz();
+  const { answers, index } = useAppSelector((state) => state.quiz);
+  const dispatch = useAppDispatch();
   return (
-    <StyledOption
-      onClick={() => dispatch?.({ type: "newAnswer", payload: optIndex })}
-    >
+    <StyledOption onClick={() => dispatch(newAnwser(optIndex))}>
       <CheckBox isChecked={answers[index] === optIndex} />
       <Span>{children}</Span>
     </StyledOption>

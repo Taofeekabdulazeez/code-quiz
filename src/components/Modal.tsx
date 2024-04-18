@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
-import { useQuiz } from "../contexts/QuizContext";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { unConfirmSubmission } from "../features/quizSlice";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -65,7 +66,8 @@ const Button = styled.div<{ $type?: string }>`
 `;
 
 function Modal() {
-  const { onSubmit, dispatch } = useQuiz();
+  const { onSubmit } = useAppSelector((state) => state.quiz);
+  const dispatch = useAppDispatch();
   return (
     onSubmit && (
       <>
@@ -77,16 +79,20 @@ function Modal() {
             want to end the exam and submit your answers you can press YES
           </P>
           <BtnWrapper>
-            <Button onClick={() => dispatch?.({ type: "end" })}>Yes</Button>
+            <Button onClick={() => {}}>Yes</Button>
             <Button
               $type="inverted"
-              onClick={() => dispatch?.({ type: "unSubmit" })}
+              onClick={() => dispatch(unConfirmSubmission())}
             >
               No
             </Button>
           </BtnWrapper>
         </StyledModal>
-        <Overlay onClick={() => dispatch?.({ type: "unSubmit" })} />
+        <Overlay
+          onClick={() => {
+            dispatch(unConfirmSubmission());
+          }}
+        />
       </>
     )
   );

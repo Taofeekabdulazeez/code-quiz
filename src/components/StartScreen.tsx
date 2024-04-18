@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { Button } from "../ui/Button";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { startQuiz } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { Button } from "../ui/Button";
 
 const StyledStartScreen = styled.div`
   text-align: center;
@@ -45,8 +45,8 @@ const FlexCol = styled.div`
 `;
 
 function StartScreen() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("Taofeek");
+  const [email, setEmail] = useState("tao@mail.com");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useQuiz } from "../contexts/QuizContext";
+import { useAppSelector } from "../hooks/hooks";
 
 const P = styled.div`
   font-size: 1.2rem;
@@ -10,10 +10,11 @@ const P = styled.div`
 `;
 
 function Answered() {
-  const { answered, questions } = useQuiz();
+  // const { answered, questions } = useQuiz();
+  const { questions } = useAppSelector((state) => state.quiz);
   return (
     <P>
-      {answered} of {questions.length} questions answered
+      {""} of {questions.length} questions answered
     </P>
   );
 }

@@ -1,6 +1,10 @@
-import { useQuiz } from "../contexts/QuizContext";
+import { useAppSelector } from "../hooks/hooks";
 import Option from "./Option";
 import styled from "styled-components";
+// import { useLoaderData } from "react-router-dom";
+// import { questionObj } from "../interfaces/interface";
+// import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+// import { storeQuestions } from "../features/quizSlice";
 
 const Span = styled.span`
   font-size: 1.6rem;
@@ -26,18 +30,17 @@ const List = styled.ul`
 `;
 
 function Question() {
-  const { questions, index = 0 } = useQuiz();
-  let question;
-  if (questions && index >= 0) question = questions[index];
+  const { questions, index } = useAppSelector((state) => state.quiz);
+  const { question, options } = questions[index];
 
   return (
     <div>
       <Span>
-        Question {index + 1} of {questions?.length}
+        Question {index + 1} of {questions.length}
       </Span>
-      <StyledQuestion>{question?.question}</StyledQuestion>
+      <StyledQuestion>{question}</StyledQuestion>
       <List>
-        {question?.options.map((option, i) => (
+        {options.map((option, i) => (
           <Option key={option} optIndex={i}>
             {option}
           </Option>

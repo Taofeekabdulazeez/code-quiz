@@ -1,12 +1,13 @@
-import { useQuiz } from "../contexts/QuizContext";
+import { useAppSelector } from "../hooks/hooks";
 
 function FinishScreen() {
-  const { score, questions } = useQuiz();
+  const { questions } = useAppSelector((state) => state.quiz);
+
   return (
     <div>
       Total score:{" "}
       <strong>
-        {score} / {questions?.length}
+        {""} / {questions?.length}
       </strong>
     </div>
   );

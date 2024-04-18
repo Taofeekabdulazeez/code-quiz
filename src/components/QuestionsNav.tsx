@@ -1,4 +1,4 @@
-import { useQuiz } from "../contexts/QuizContext";
+import { useAppSelector } from "../hooks/hooks";
 import QIndex from "./QIndex";
 import styled from "styled-components";
 
@@ -10,7 +10,8 @@ const FlexWrap = styled.div`
 `;
 
 function QuestionsNav() {
-  const { questions } = useQuiz();
+  // const { questions } = useQuiz();
+  const questions = useAppSelector((state) => state.quiz.questions);
   const numQuestions = Number(questions?.length);
   return (
     <div>

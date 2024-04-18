@@ -1,6 +1,8 @@
-import { useQuiz } from "../contexts/QuizContext";
+// import { useQuiz } from "../contexts/QuizContext";
 import styled from "styled-components";
 import { FaCheck } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { gotoQuestion } from "../features/quizSlice";
 
 const Button = styled.button`
   position: relative;
@@ -49,14 +51,16 @@ interface QindexProps {
 }
 
 function QIndex({ qNumber }: QindexProps) {
-  const { index, dispatch, answers } = useQuiz();
+  // const { answers } = useQuiz();
+  const { index, answers } = useAppSelector((state) => state.quiz);
+  const dispatch = useAppDispatch();
   const hasAnswer = typeof answers[qNumber - 1] === "number";
   return (
     <Button
       className={`${index + 1 === qNumber ? "active" : ""} ${
         hasAnswer ? "answered" : ""
       }`}
-      onClick={() => dispatch?.({ type: "gotoQuestion", payload: qNumber - 1 })}
+      onClick={() => dispatch(gotoQuestion(qNumber))}
     >
       {false && <FaCheck size={8} />}
       {qNumber}
