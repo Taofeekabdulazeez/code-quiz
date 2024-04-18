@@ -9,6 +9,7 @@ const initialState: QuizState = {
   onSubmit: false,
   score: 0,
   time: null,
+  status: "ready",
 };
 
 const quizSlice = createSlice({
@@ -22,6 +23,10 @@ const quizSlice = createSlice({
         () => null
       );
       state.time = SECS_PER_QUESTION * state.questions.length;
+      // state.status = "start";
+    },
+    startQuiz(state) {
+      state.status = "start";
     },
     nextQuestion(state) {
       if (state.index !== state.questions.length - 1) state.index++;
@@ -34,6 +39,9 @@ const quizSlice = createSlice({
     },
     newAnwser(state, action: PayloadAction<number>) {
       state.answers[state.index] = action.payload;
+      state.score = state.answers.filter(
+        (answer, index) => answer === state.questions[index].correctOption
+      ).length;
     },
     confirmSubmission(state) {
       state.onSubmit = true;
@@ -41,15 +49,17 @@ const quizSlice = createSlice({
     unConfirmSubmission(state) {
       state.onSubmit = false;
     },
+    isSubmitting(state) {
+      state.status = "submitting";
+    },
     submit(state) {
-      state.score = state.answers.filter(
-        (answer, index) => answer === state.questions[index].correctOption
-      ).length;
+      state.status = "finish";
     },
   },
 });
 
 export const {
+  startQuiz,
   nextQuestion,
   storeQuestions,
   prevQuestion,
@@ -57,6 +67,7 @@ export const {
   newAnwser,
   confirmSubmission,
   unConfirmSubmission,
+  isSubmitting,
   submit,
 } = quizSlice.actions;
 

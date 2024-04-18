@@ -28,7 +28,7 @@ export interface QuizState {
   onSubmit: boolean;
   score: number;
   time: null | number;
-  status?: string;
+  status: "ready" | "start" | "finish" | "submitting";
 }
 
 // The context will always include more derived states
@@ -47,4 +47,10 @@ export interface questionObj {
   question: string;
   options: Array<string>;
   correctOption: number;
+}
+
+export interface Student {
+  name: string;
+  email: string;
+  score: number;
 }

@@ -1,22 +1,20 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { useAppSelector } from "./hooks/hooks.ts";
 import StartScreen from "./components/StartScreen";
 import FinishScreen from "./components/FinishScreen";
 import Main from "./components/Main.tsx";
 import AppLayout from "./components/AppLayout.tsx";
-
-const router = createBrowserRouter([
-  {
-    element: <AppLayout />,
-    children: [
-      { element: <StartScreen />, path: "/" },
-      { element: <Main />, path: "quiz" },
-      { element: <FinishScreen />, path: "finish" },
-    ],
-  },
-]);
+import Loader from "./ui/Loader.tsx";
 
 function App() {
-  return <RouterProvider router={router} />;
+  const status = useAppSelector((state) => state.quiz.status);
+  return (
+    <AppLayout>
+      {status === "ready" && <StartScreen />}
+      {status === "start" && <Main />}
+      {status === "submitting" && <Loader message="Submitting..." />}
+      {status === "finish" && <FinishScreen />}
+    </AppLayout>
+  );
 }
 
 export default App;

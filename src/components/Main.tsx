@@ -31,18 +31,20 @@ function Main() {
   const dispatch = useAppDispatch();
   if (data) dispatch(storeQuestions(data));
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <Loader message="Loading Questions..." />;
 
   return (
     <MainLayout>
       <Modal />
-      <QuestionScreen />
+      <div>
+        <QuestionScreen />
+        <QuestionsNav />
+      </div>
       <Aside>
         <Time />
         <Answered />
         <ButtonSubmit />
       </Aside>
-      <QuestionsNav />
     </MainLayout>
   );
 }

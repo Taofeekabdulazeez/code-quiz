@@ -8,8 +8,12 @@ const StyledLoader = styled.h1`
   margin-top: 16rem;
 `;
 
-function Loader() {
-  return <StyledLoader>Loading Questions...</StyledLoader>;
+interface LoaderProps {
+  message?: string;
+}
+
+function Loader({ message = "Loading" }: LoaderProps) {
+  return <StyledLoader>{message}</StyledLoader>;
 }
 
 export default Loader;

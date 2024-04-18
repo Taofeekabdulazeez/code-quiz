@@ -14,13 +14,13 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    startQuiz(state, action: PayloadAction<{ name: string; email: string }>) {
+    storeUser(state, action: PayloadAction<{ name: string; email: string }>) {
       state.name = action.payload.email;
       state.email = action.payload.email;
     },
   },
 });
 
-export const { startQuiz } = userSlice.actions;
+export const { storeUser } = userSlice.actions;
 
 export default userSlice.reducer;

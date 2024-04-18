@@ -1,7 +1,12 @@
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { submit, unConfirmSubmission } from "../features/quizSlice";
-import { useNavigate } from "react-router-dom";
+import {
+  isSubmitting,
+  submit,
+  unConfirmSubmission,
+} from "../features/quizSlice";
 import styled, { css } from "styled-components";
+import { useMutation } from "@tanstack/react-query";
+import { createStudent } from "../services/apiStudents";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -67,9 +72,16 @@ const Button = styled.div<{ $type?: string }>`
 `;
 
 function Modal() {
-  const { onSubmit } = useAppSelector((state) => state.quiz);
+  const { onSubmit, score } = useAppSelector((state) => state.quiz);
+  const { name, email } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+
+  const { mutate } = useMutation({
+    mutationFn: createStudent,
+    onSuccess: () => dispatch(submit()),
+    onMutate: () => dispatch(isSubmitting()),
+  });
+
   return (
     onSubmit && (
       <>
@@ -83,8 +95,7 @@ function Modal() {
           <BtnWrapper>
             <Button
               onClick={() => {
-                dispatch(submit());
-                navigate("/finish");
+                mutate({ name, email, score });
               }}
             >
               Yes

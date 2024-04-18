@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { startQuiz } from "../features/userSlice";
-import { useNavigate } from "react-router-dom";
+import { storeUser } from "../features/userSlice";
 import styled from "styled-components";
 
 import { Button } from "../ui/Button";
+import { startQuiz } from "../features/quizSlice";
 
 const StyledStartScreen = styled.div`
   text-align: center;
@@ -49,12 +49,11 @@ function StartScreen() {
   const [name, setName] = useState("Taofeek");
   const [email, setEmail] = useState("tao@mail.com");
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleStartQuiz = function () {
     if (!name || !email) return;
-    dispatch(startQuiz({ name, email }));
-    navigate("/quiz");
+    dispatch(storeUser({ name, email }));
+    dispatch(startQuiz());
   };
 
   return (

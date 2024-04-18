@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { MdAccessTime } from "react-icons/md";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { submit } from "../features/quizSlice";
-import { useNavigate } from "react-router-dom";
+import { isSubmitting, submit } from "../features/quizSlice";
+import { useMutation } from "@tanstack/react-query";
+import { createStudent } from "../services/apiStudents";
 
 const FlexRol = styled.div`
   display: flex;
@@ -49,16 +50,21 @@ const P = styled.p`
 `;
 
 function Time() {
-  const qTime = useAppSelector((state) => state.quiz.time);
+  const { name, email } = useAppSelector((state) => state.user);
+  const { mutate } = useMutation({
+    mutationFn: createStudent,
+    onSuccess: () => dispatch(submit()),
+    onMutate: () => dispatch(isSubmitting()),
+  });
+
+  const { time: qTime, score } = useAppSelector((state) => state.quiz);
   const [time, setTime] = useState<number | null>(qTime);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   useEffect(
     function () {
       if (time === 0) {
-        dispatch(submit());
-        navigate("/finish");
+        mutate({ name, email, score });
         return;
       }
       // eslint-disable-next-line prefer-const
@@ -67,7 +73,7 @@ function Time() {
       }, 1000);
       return () => clearInterval(id);
     },
-    [time, dispatch, navigate]
+    [time, dispatch, mutate, name, email, score]
   );
 
   if (!time) return null;
