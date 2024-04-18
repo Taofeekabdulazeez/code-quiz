@@ -12,6 +12,7 @@ import Time from "./Time";
 import Answered from "./Answered";
 import ButtonSubmit from "./ButtonSubmit";
 import Aside from "./Aside";
+import UserGuide from "../ui/UserGuide";
 
 const MainLayout = styled.main`
   display: grid;
@@ -44,6 +45,7 @@ function Main() {
         <Time />
         <Answered />
         <ButtonSubmit />
+        <UserGuide />
       </Aside>
     </MainLayout>
   );
