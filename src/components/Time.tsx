@@ -1,5 +1,9 @@
+import { useEffect, useState } from "react";
 import { MdAccessTime } from "react-icons/md";
 import styled from "styled-components";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { submit } from "../features/quizSlice";
+import { useNavigate } from "react-router-dom";
 
 const FlexRol = styled.div`
   display: flex;
@@ -45,6 +49,29 @@ const P = styled.p`
 `;
 
 function Time() {
+  const qTime = useAppSelector((state) => state.quiz.time);
+  const [time, setTime] = useState<number | null>(qTime);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(
+    function () {
+      if (time === 0) {
+        dispatch(submit());
+        navigate("/finish");
+        return;
+      }
+      // eslint-disable-next-line prefer-const
+      const id = setInterval(function () {
+        setTime((time) => (typeof time === "number" ? time - 1 : time));
+      }, 1000);
+      return () => clearInterval(id);
+    },
+    [time, dispatch, navigate]
+  );
+
+  if (!time) return null;
+
   return (
     <Center>
       <P>
@@ -52,9 +79,9 @@ function Time() {
         Time Remaining
       </P>
       <FlexRol>
-        <TextBox>14</TextBox>
+        <TextBox>{String(Math.trunc(time / 60)).padStart(2, "0")}</TextBox>
         <Colon>:</Colon>
-        <TextBox>05</TextBox>
+        <TextBox>{String(time % 60).padStart(2, "0")}</TextBox>
       </FlexRol>
     </Center>
   );

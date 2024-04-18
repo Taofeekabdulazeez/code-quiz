@@ -4,12 +4,34 @@ export interface QuizProviderProps {
   children: ReactNode;
 }
 
-export interface actionObj {
-  type?: string;
+export interface QuizAction {
+  type:
+    | "loading"
+    | "dataReceived"
+    | "ready"
+    | "start"
+    | "nextQuestion"
+    | "prevQuestion"
+    | "gotoQuestion"
+    | "newAnswer"
+    | "onSubmit"
+    | "unSubmit"
+    | "end";
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload?: Array<questionObj> | any;
 }
 
+export interface QuizState {
+  status: string;
+  questions: Array<questionObj>;
+  index: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  answers: Array<any>;
+  onSubmit: boolean;
+  score: number;
+}
+
+// The context will always include more derived states
 export interface QuizContextInterface {
   questions: Array<questionObj>;
   index: number;
@@ -19,7 +41,7 @@ export interface QuizContextInterface {
   answers: Array<any>;
   answered?: number;
   status?: string;
-  dispatch?: (action: actionObj) => void;
+  dispatch?: (action: QuizAction) => void;
 }
 
 export interface questionObj {

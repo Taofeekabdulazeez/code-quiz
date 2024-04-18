@@ -12,9 +12,12 @@ const P = styled.div`
 function Answered() {
   // const { answered, questions } = useQuiz();
   const { questions } = useAppSelector((state) => state.quiz);
+  const answered = useAppSelector(
+    (state) => state.quiz.answers.filter((answer) => answer !== null).length
+  );
   return (
     <P>
-      {""} of {questions.length} questions answered
+      {answered} of {questions.length} questions answered
     </P>
   );
 }

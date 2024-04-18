@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { unConfirmSubmission } from "../features/quizSlice";
+import { submit, unConfirmSubmission } from "../features/quizSlice";
+import { useNavigate } from "react-router-dom";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -68,6 +69,7 @@ const Button = styled.div<{ $type?: string }>`
 function Modal() {
   const { onSubmit } = useAppSelector((state) => state.quiz);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   return (
     onSubmit && (
       <>
@@ -79,7 +81,14 @@ function Modal() {
             want to end the exam and submit your answers you can press YES
           </P>
           <BtnWrapper>
-            <Button onClick={() => {}}>Yes</Button>
+            <Button
+              onClick={() => {
+                dispatch(submit());
+                navigate("/finish");
+              }}
+            >
+              Yes
+            </Button>
             <Button
               $type="inverted"
               onClick={() => dispatch(unConfirmSubmission())}

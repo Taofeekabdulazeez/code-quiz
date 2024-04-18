@@ -2,10 +2,11 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import {
   QuizContextInterface,
   QuizProviderProps,
-  actionObj,
+  QuizState,
+  QuizAction,
 } from "../interfaces/interface";
 
-const initialState: QuizContextInterface = {
+const initialState: QuizState = {
   status: "",
   questions: [],
   index: 0,
@@ -14,7 +15,7 @@ const initialState: QuizContextInterface = {
   score: 0,
 };
 
-function reducer(state: QuizContextInterface, action: actionObj) {
+function reducer(state: QuizState, action: QuizAction) {
   switch (action.type) {
     case "loading":
       return { ...state };
@@ -70,12 +71,9 @@ function reducer(state: QuizContextInterface, action: actionObj) {
   }
 }
 
-const QuizContent = createContext<QuizContextInterface>({
-  index: 0,
-  answers: [],
-  questions: [],
-});
-3;
+const QuizContent = createContext<QuizContextInterface>(
+  {} as QuizContextInterface
+);
 
 function QuizProvider({ children }: QuizProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -115,7 +113,7 @@ function QuizProvider({ children }: QuizProviderProps) {
 
 function useQuiz() {
   const context = useContext(QuizContent);
-  if (!context) throw new Error("QuizContext used out pf QuizProvider");
+  if (!context) throw new Error("QuizContext used outside of QuizProvider");
 
   return context;
 }
