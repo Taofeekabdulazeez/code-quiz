@@ -15,6 +15,7 @@ import { useQuestions } from "../hooks/useQuestions";
 
 const MainLayout = styled.main`
   display: grid;
+  padding: 1.2rem;
   grid-template-columns: 1fr 0.3fr;
   @media (max-width: 35em) {
     grid-template-columns: 1fr;
@@ -23,6 +24,7 @@ const MainLayout = styled.main`
   position: relative;
   gap: 1.6rem;
   background-color: var(--color-bg-900);
+  height: 100dvh;
 `;
 
 function Main() {

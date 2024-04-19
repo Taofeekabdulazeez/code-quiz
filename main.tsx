@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import store from "./src/store.ts";
 import App from "./src/App.tsx";
 import "./src/index.css";
-import "@cloudscape-design/global-styles/index.css";
+// import "@cloudscape-design/global-styles/index.css";
 
 const queryClient = new QueryClient({});
 

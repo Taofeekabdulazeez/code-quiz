@@ -13,8 +13,8 @@
 }
 
 :root.light-mode {
-  --color-primary: #0672cb;
-  /* --color-primary: #0837fb; */
+  /* --color-primary: #0672cb; */
+  --color-primary: #0567b7;
   --color-text: #333;
   --color-bg-900: #fff;
   /* --color-bg-700: #f0f3f7; */
@@ -39,6 +39,10 @@ body {
   font-family: var(--ff-body);
   line-height: var(--line-height-body);
   color: var(--color-text);
+  /* background: linear-gradient(to top left, #02223d, #033966); */
+  background-repeat: no-repeat;
+  height: 100dvh;
+
   /* background-color: #f5f9fd; */
   /* background-color: var(--color-bg-900); */
 }

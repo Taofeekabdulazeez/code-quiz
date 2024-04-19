@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { ReactNode } from "react";
 
 const AppContainer = styled.div`
-  padding: 1.6rem;
+  /* padding: 1.6rem; */
+
   @media (max-width: 35em) {
     padding: 0;
   }
