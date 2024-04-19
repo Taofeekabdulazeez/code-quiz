@@ -5,6 +5,6 @@ export const Container = styled.div`
   /* width: 100%; */
   /* margin: 0 auto; */
   background-color: var(--color-bg-700);
-  padding: 1.6rem;
+  padding: 1rem 1.6rem;
   position: relative;
 `;

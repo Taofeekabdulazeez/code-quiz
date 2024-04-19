@@ -16,13 +16,19 @@ const ButtonWrap = styled.div`
   gap: 1.2rem;
 `;
 
+const Title = styled.h1`
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 4rem;
+`;
+
 function QuestionScreen() {
   const dispatch = useAppDispatch();
   return (
     <Container>
       <Header>
+        <Title>GNS112 CA</Title>
         {false && <Timer />}
-        <div></div>
       </Header>
       <Question />
       <ButtonWrap>

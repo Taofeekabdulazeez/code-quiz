@@ -11,7 +11,7 @@ const StyledStartScreen = styled.div`
 `;
 
 const Heading = styled.h1`
-  font-size: 3.2rem;
+  font-size: 2.8rem;
   margin-bottom: 4rem;
   font-weight: 600;
 `;
@@ -58,7 +58,7 @@ function StartScreen() {
 
   return (
     <StyledStartScreen>
-      <Heading>Let's start</Heading>
+      <Heading>Provide your Name and Email to start the Quiz</Heading>
       <FlexCol>
         <div>
           <Label>Name</Label>

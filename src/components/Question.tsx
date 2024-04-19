@@ -11,7 +11,7 @@ const Span = styled.span`
   font-weight: 600;
   display: block;
   text-transform: uppercase;
-  margin-bottom: 2.4rem;
+  margin-bottom: 2rem;
 `;
 
 const StyledQuestion = styled.p`
