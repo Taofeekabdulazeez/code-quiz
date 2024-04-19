@@ -1,6 +1,4 @@
 import { storeQuestions } from "../features/quizSlice";
-import { useQuery } from "@tanstack/react-query";
-import { getQuestions } from "../services/apiQuestions";
 import { useAppDispatch } from "../hooks/hooks";
 import styled from "styled-components";
 
@@ -13,6 +11,7 @@ import Answered from "./Answered";
 import ButtonSubmit from "./ButtonSubmit";
 import Aside from "./Aside";
 import UserGuide from "../ui/UserGuide";
+import { useQuestions } from "../hooks/useQuestions";
 
 const MainLayout = styled.main`
   display: grid;
@@ -24,13 +23,9 @@ const MainLayout = styled.main`
 `;
 
 function Main() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["questions"],
-    queryFn: getQuestions,
-  });
-
+  const { isLoading, questions } = useQuestions();
   const dispatch = useAppDispatch();
-  if (data) dispatch(storeQuestions(data));
+  if (questions) dispatch(storeQuestions(questions));
 
   if (isLoading) return <Loader message="Loading Questions..." />;
 

@@ -1,12 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import {
-  isSubmitting,
-  submit,
-  unConfirmSubmission,
-} from "../features/quizSlice";
+
 import styled, { css } from "styled-components";
-import { useMutation } from "@tanstack/react-query";
-import { createStudent } from "../services/apiStudents";
+import { useSubmit } from "../hooks/useSubmit";
+import { unConfirmSubmission } from "../features/quizSlice";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -72,15 +68,10 @@ const Button = styled.div<{ $type?: string }>`
 `;
 
 function Modal() {
+  const { submitQuiz } = useSubmit();
   const { onSubmit, score } = useAppSelector((state) => state.quiz);
   const { name, email } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-
-  const { mutate } = useMutation({
-    mutationFn: createStudent,
-    onSuccess: () => dispatch(submit()),
-    onMutate: () => dispatch(isSubmitting()),
-  });
 
   return (
     onSubmit && (
@@ -95,7 +86,7 @@ function Modal() {
           <BtnWrapper>
             <Button
               onClick={() => {
-                mutate({ name, email, score });
+                submitQuiz({ name, email, score });
               }}
             >
               Yes

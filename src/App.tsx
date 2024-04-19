@@ -7,6 +7,7 @@ import Loader from "./ui/Loader.tsx";
 
 function App() {
   const status = useAppSelector((state) => state.quiz.status);
+
   return (
     <AppLayout>
       {status === "ready" && <StartScreen />}
