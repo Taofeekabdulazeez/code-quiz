@@ -46,3 +46,7 @@ body {
   /* background-color: #f5f9fd; */
   /* background-color: var(--color-bg-900); */
 }
+
+.p {
+  display: block;
+}
