@@ -11,3 +11,15 @@ export async function createStudent(student: Student) {
 
   return data;
 }
+
+export async function findStudent(email: string) {
+  const { data, error } = await supabase
+    .from("students")
+    .select("*")
+    .eq("email", email)
+    .single();
+
+  if (error) console.log(error);
+
+  return data;
+}

@@ -1,9 +1,9 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { storeUser } from "../features/userSlice";
 import styled from "styled-components";
 
 import { startQuiz } from "../features/quizSlice";
+import { useState } from "react";
 
 const StyledStartScreen = styled.div`
   height: 100vh;
