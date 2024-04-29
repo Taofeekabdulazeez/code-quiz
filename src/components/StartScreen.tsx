@@ -84,7 +84,8 @@ function StartScreen() {
   // const [isEmpty, setIsEmpty] = useState(false);
   const dispatch = useDispatch();
 
-  const handleStartQuiz = function () {
+  const handleStartQuiz = function (event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     if (!name || !email) return;
     dispatch(storeUser({ name, email }));
     dispatch(startQuiz());
@@ -92,7 +93,7 @@ function StartScreen() {
 
   return (
     <StyledStartScreen>
-      <LoginForm>
+      <LoginForm onSubmit={handleStartQuiz}>
         <Heading>Welcome</Heading>
         <FlexCol>
           <Inputbox>
@@ -113,12 +114,7 @@ function StartScreen() {
               onChange={(event) => setEmail(event.target.value)}
             />
           </Inputbox>
-          <Button
-            className={!name || !email ? "empty" : ""}
-            onClick={handleStartQuiz}
-          >
-            Start Quiz
-          </Button>
+          <Button className={!name || !email ? "empty" : ""}>Start Quiz</Button>
         </FlexCol>
       </LoginForm>
     </StyledStartScreen>

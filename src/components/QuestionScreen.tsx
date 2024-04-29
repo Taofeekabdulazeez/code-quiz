@@ -1,5 +1,4 @@
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { Container } from "../ui/Container";
 import Header from "./Header";
 import Question from "./Question";
 import Timer from "../ui/Timer";
@@ -8,12 +7,30 @@ import { Button } from "../ui/Button";
 import { useAppDispatch } from "../hooks/hooks";
 import { nextQuestion, prevQuestion } from "../features/quizSlice";
 
+const Screen = styled.div`
+  /* max-width: 80rem; */
+  /* width: 100%; */
+  /* margin: 0 auto; */
+  background-color: var(--color-bg-700);
+  padding: 1rem 1.6rem;
+  position: relative;
+
+  @media (max-width: 40em) {
+    height: 100dvh;
+  }
+`;
+
 const ButtonWrap = styled.div`
   position: absolute;
   right: 1rem;
   bottom: 1rem;
   display: flex;
   gap: 1.2rem;
+  @media (max-width: 40em) {
+    left: 50%;
+    bottom: 10%;
+    transform: translate(-50%, -50%);
+  }
 `;
 
 const Title = styled.h1`
@@ -25,7 +42,7 @@ const Title = styled.h1`
 function QuestionScreen() {
   const dispatch = useAppDispatch();
   return (
-    <Container>
+    <Screen>
       <Header>
         <Title>GNS112 CA</Title>
         {false && <Timer />}
@@ -47,7 +64,7 @@ function QuestionScreen() {
           Next <FaArrowRight />
         </Button>
       </ButtonWrap>
-    </Container>
+    </Screen>
   );
 }
 

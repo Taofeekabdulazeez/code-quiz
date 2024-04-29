@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { QuizState, questionObj } from "../interfaces/interface";
+import { QuizState, Question } from "../interfaces/interface";
 import { SECS_PER_QUESTION } from "../configs/AppConfig";
 
 const initialState: QuizState = {
@@ -16,7 +16,7 @@ const quizSlice = createSlice({
   name: "quiz",
   initialState,
   reducers: {
-    storeQuestions(state, action: PayloadAction<questionObj[]>) {
+    storeQuestions(state, action: PayloadAction<Question[]>) {
       state.questions = action.payload;
       state.answers = Array.from(
         { length: state.questions.length },

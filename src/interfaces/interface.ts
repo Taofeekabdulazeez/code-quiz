@@ -18,11 +18,11 @@ export interface QuizAction {
     | "unSubmit"
     | "end";
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  payload?: Array<questionObj> | any;
+  payload?: Array<Question> | any;
 }
 
 export interface QuizState {
-  questions: Array<questionObj>;
+  questions: Array<Question>;
   index: number;
   answers: Array<number | null>;
   onSubmit: boolean;
@@ -33,7 +33,7 @@ export interface QuizState {
 
 // The context will always include more derived states
 export interface QuizContextInterface {
-  questions: Array<questionObj>;
+  questions: Array<Question>;
   index: number;
   onSubmit?: boolean;
   score?: number;
@@ -43,7 +43,7 @@ export interface QuizContextInterface {
   dispatch?: (action: QuizAction) => void;
 }
 
-export interface questionObj {
+export interface Question {
   question: string;
   options: Array<string>;
   correctOption: number;
